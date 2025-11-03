@@ -1,6 +1,7 @@
 import { Bell, History, Settings } from 'lucide-react-native';
 import React from 'react';
 import {
+  Alert,
   Image,
   ScrollView,
   StatusBar,
@@ -12,55 +13,102 @@ import {
 import { SafeAreaView } from 'react-native-safe-area-context';
 
 export default function App() {
+  const onPress = () => {
+    Alert.alert('VAHAHAHAHAHA');
+  };
   return (
-    <SafeAreaView style={styles.container}>
-      <StatusBar barStyle={'light-content'} />
-      {/* Header */}
+    <ScrollView>
+      <SafeAreaView style={styles.container}>
+        <StatusBar barStyle={'light-content'} />
+        {/* Header */}
 
-      <View style={styles.headerContainer}>
-        <View style={styles.headerTop}>
-          <Text style={styles.headerText}>Recently played</Text>
-          <View style={styles.iconWrapper}>
-            <TouchableOpacity>
-              <Bell size={20} color="white" />
-            </TouchableOpacity>
-            <TouchableOpacity>
-              <History size={20} color="white" />
-            </TouchableOpacity>
-            <TouchableOpacity>
-              <Settings size={20} color="white" />
-            </TouchableOpacity>
+        <View style={styles.headerContainer}>
+          <View style={styles.headerTop}>
+            <Text style={styles.headerText}>Recently played</Text>
+            <View style={styles.iconWrapper}>
+              <TouchableOpacity onPress={onPress}>
+                <Bell size={20} color="white" />
+              </TouchableOpacity>
+              <TouchableOpacity onPress={onPress}>
+                <History size={20} color="white" />
+              </TouchableOpacity>
+              <TouchableOpacity onPress={onPress}>
+                <Settings size={20} color="white" />
+              </TouchableOpacity>
+            </View>
+          </View>
+          {/* Flat card */}
+          <View>
+            <ScrollView
+              style={styles.scrollViewContainer}
+              horizontal={true}
+              showsHorizontalScrollIndicator={false}
+            >
+              {cards.map(item => (
+                <View key={item.name} style={styles.card}>
+                  <Image
+                    source={imageMap[item.name]}
+                    style={styles.cardImage}
+                  />
+                  <Text style={styles.cardTitle}>{item.title}</Text>
+                </View>
+              ))}
+            </ScrollView>
           </View>
         </View>
-        {/* Flat card */}
-        <View>
-          <ScrollView
-            style={styles.scrollViewContainer}
-            horizontal={true}
-            showsHorizontalScrollIndicator={false}
-          >
-            {cards.map(item => (
-              <View key={item.name} style={styles.card}>
-                <Image source={imageMap[item.name]} style={styles.cardImage} />
-                <Text style={styles.cardTitle}>{item.title}</Text>
-              </View>
-            ))}
-          </ScrollView>
-        </View>
-      </View>
-      <View style={styles.bodyView}>
-        <View style={styles.blogCard}>
-          <Image
-            source={require('../assets/images/spotify-images/img1.png')}
-            style={styles.blogCardImage}
-          />
-          <View style={styles.blogTextWrapper}>
-            <Text style={styles.blogHashtag}>#SPOTIFYWRAPPED</Text>
-            <Text style={styles.blogTitle}>Your 2021 in review</Text>
+
+        {/* Blog card */}
+        <View style={styles.bodyView}>
+          <View style={styles.blogCard}>
+            <Image
+              source={require('../assets/images/spotify-images/img1.png')}
+              style={styles.blogCardImage}
+            />
+            <View style={styles.blogTextWrapper}>
+              <Text style={styles.blogHashtag}>#SPOTIFYWRAPPED</Text>
+              <Text style={styles.blogTitle}>Your 2021 in review</Text>
+            </View>
           </View>
         </View>
-      </View>
-    </SafeAreaView>
+
+        <View style={styles.songsContainer}>
+          <View style={styles.topSongsContainer}>
+            <View style={styles.topSongsCard}>
+              <Image
+                source={require('../assets/images/spotify-images/img1.png')}
+                style={styles.topSongsImage}
+              />
+              <Text style={styles.topSongsTitle}>Your Top Songs 2021</Text>
+            </View>
+            <View style={styles.topSongsCard}>
+              <Image
+                source={require('../assets/images/img1.jpg')}
+                style={styles.topSongsImage}
+              />
+              <Text style={styles.topSongsTitle}>Your Top Songs 2021</Text>
+            </View>
+          </View>
+          <View>
+            <Text style={styles.bottomTitle}>Editor’s picks</Text>
+            <ScrollView
+              style={styles.bottomContainer}
+              horizontal={true}
+              showsHorizontalScrollIndicator={false}
+            >
+              {cards.map((item, index) => (
+                <View key={index} style={styles.bottomCard}>
+                  <Image
+                    source={imageMap[item.name]}
+                    style={styles.bottomImage}
+                  />
+                  <Text style={styles.bottomText}>{item.title}</Text>
+                </View>
+              ))}
+            </ScrollView>
+          </View>
+        </View>
+      </SafeAreaView>
+    </ScrollView>
   );
 }
 
@@ -168,5 +216,52 @@ const styles = StyleSheet.create({
   blogTextWrapper: {
     flex: 1,
     alignItems: 'baseline',
+  },
+  songsContainer: {
+    flex: 1,
+  },
+  topSongsContainer: {
+    flex: 1,
+    flexDirection: 'row',
+    gap: 16,
+    marginVertical: 24,
+  },
+  topSongsCard: {
+    width: 153,
+    height: 187,
+  },
+  topSongsImage: {
+    width: 153,
+    height: 154,
+  },
+  topSongsTitle: {
+    fontWeight: 600,
+    fontSize: 13,
+    letterSpacing: -0.03,
+    color: '#fff',
+  },
+  bottomContainer: {
+    flexDirection: 'row',
+    gap: 15,
+    marginTop: 12,
+  },
+  bottomTitle: {
+    fontWeight: 600,
+    fontSize: 24,
+    letterSpacing: -0.05,
+    color: '#fff',
+  },
+  bottomCard: {
+    width: 161,
+    height: 193,
+  },
+  bottomImage: {
+    width: 154,
+    height: 154,
+  },
+  bottomText: {
+    fontWeight: 500,
+    fontSize: 11,
+    color: '#b3b3b3',
   },
 });
