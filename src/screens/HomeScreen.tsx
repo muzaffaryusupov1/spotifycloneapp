@@ -14,8 +14,9 @@ import { SafeAreaView } from 'react-native-safe-area-context';
 
 export default function HomeScreen() {
   const onPress = () => {
-    Alert.alert('VAHAHAHAHAHA');
+    Alert.alert('Alert');
   };
+
   return (
     <ScrollView>
       <SafeAreaView style={styles.container}>
