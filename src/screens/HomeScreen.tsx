@@ -115,22 +115,22 @@ export default function HomeScreen() {
 
 const imageMap: Record<string, any> = {
   img1: require('../../assets/images/img1.jpg'),
-  img2: require('../../assets/images/img2.jpg'),
-  img3: require('../../assets/images/img3.jpg'),
-  img4: require('../../assets/images/img4.jpg'),
-  img5: require('../../assets/images/img5.jpg'),
-  img6: require('../../assets/images/img6.jpg'),
+  img2: require('../../assets/images/img11.png'),
+  img3: require('../../assets/images/img12.png'),
+  img4: require('../../assets/images/img15.jpg'),
+  img5: require('../../assets/images/img14.jpg'),
+  img6: require('../../assets/images/img13.png'),
   img7: require('../../assets/images/img7.jpg'),
   img8: require('../../assets/images/img8.jpg'),
 };
 
 const cards = [
   { name: 'img1', title: 'Monkey' },
-  { name: 'img2', title: 'Sad tiger' },
-  { name: 'img3', title: 'Tomato speed' },
-  { name: 'img4', title: 'Furuta' },
-  { name: 'img5', title: 'Piccolo speed' },
-  { name: 'img6', title: 'Freaky granddad' },
+  { name: 'img2', title: '1(Remastered)' },
+  { name: 'img3', title: 'Marvin Gaye' },
+  { name: 'img4', title: 'Lana Del Rey' },
+  { name: 'img5', title: 'The Weeknd' },
+  { name: 'img6', title: 'This Is Coldplay' },
   { name: 'img7', title: 'Silver Surfer' },
   { name: 'img8', title: 'James Doakes' },
 ];

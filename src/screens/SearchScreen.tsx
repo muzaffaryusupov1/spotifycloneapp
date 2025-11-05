@@ -2,7 +2,9 @@ import { Camera, Search } from 'lucide-react-native';
 import React from 'react';
 import {
   Alert,
+  FlatList,
   Image,
+  ScrollView,
   StyleSheet,
   Text,
   TextInput,
@@ -10,13 +12,29 @@ import {
   View,
 } from 'react-native';
 
+const Item = ({ title, color }: { title: string; color: string }) => (
+  <View style={[styles.topGenresCard, { backgroundColor: color }]}>
+    <Text
+      style={styles.topGenresCardText}
+      numberOfLines={2}
+      ellipsizeMode="head"
+    >
+      {title}
+    </Text>
+    <Image
+      source={require('../../assets/images/img9.png')}
+      style={styles.topGenresCardImage}
+    />
+  </View>
+);
+
 const SearchScreen = () => {
   const onPress = () => {
     Alert.alert('Alert');
   };
 
   return (
-    <View style={styles.container}>
+    <ScrollView style={styles.container}>
       <View style={styles.headerTop}>
         <View style={styles.headerTopWrapper}>
           <TouchableOpacity>
@@ -42,32 +60,38 @@ const SearchScreen = () => {
         <Text style={styles.topGenresTitle}>Your top genres</Text>
 
         <View style={styles.topGenresList}>
-          <View style={styles.topGenresCard}>
-            <Text style={styles.topGenresCardText}>Pop</Text>
-            <Image
-              source={require('../../assets/images/spotify-images/img1.png')}
-              style={styles.topGenresCardImage}
-            />
-          </View>
-          <View style={styles.topGenresCard}>
-            <Text style={styles.topGenresCardText}>Indie</Text>
-            <Image
-              source={require('../../assets/images/img1.jpg')}
-              style={styles.topGenresCardImage}
-            />
-          </View>
+          <FlatList
+            data={cards}
+            renderItem={({ item }) => (
+              <Item title={item.title} color={item.color} />
+            )}
+            keyExtractor={item => item.id.toString()}
+            numColumns={2}
+            columnWrapperStyle={styles.row}
+          />
         </View>
       </View>
-    </View>
+    </ScrollView>
   );
 };
+
+const cards = [
+  { id: 1, title: 'Pop', color: '#ec4899' },
+  { id: 2, title: 'Indie', color: '#d946ef' },
+  { id: 3, title: 'News & Politics', color: '#a855f7' },
+  { id: 4, title: 'Comedy', color: '#6366f1' },
+  { id: 5, title: '2021 Wrapped', color: '#0369a1' },
+  { id: 6, title: 'Podcasts', color: '#881337' },
+  { id: 7, title: 'Made for you', color: '#111827' },
+  { id: 8, title: 'Charts', color: '#65a30d' },
+];
 
 const styles = StyleSheet.create({
   container: {
     flex: 1,
     backgroundColor: '#000',
-    paddingHorizontal: 16,
-    paddingTop: 30,
+    paddingHorizontal: 12,
+    paddingTop: 8,
   },
   headerText: {
     fontWeight: 700,
@@ -112,18 +136,18 @@ const styles = StyleSheet.create({
     marginVertical: 24,
   },
   topGenresTitle: {
-    fontWeight: 600,
+    fontWeight: 700,
     fontSize: 16,
     color: '#fff',
   },
-  topGenresList: {
-    flexDirection: 'row',
-    gap: 13,
-    marginTop: 20,
+  row: {
+    justifyContent: 'space-between',
+    marginBottom: 10,
+    gap: 10,
   },
   topGenresCard: {
     borderRadius: 4,
-    flex: 1,
+    width: 170,
     height: 109,
     backgroundColor: '#9854b2',
     overflow: 'hidden',
@@ -138,10 +162,28 @@ const styles = StyleSheet.create({
     transform: [{ rotate: '19.86deg' }, { translateY: 10 }, { translateX: 30 }],
   },
   topGenresCardText: {
+    maxWidth: 70,
     fontWeight: 700,
     fontSize: 16,
     color: '#fff',
-    textAlign: 'center',
+  },
+
+  topGenresList: {
+    flexDirection: 'row',
+    gap: 13,
+    marginTop: 20,
+  },
+
+  item: {
+    flex: 1,
+    margin: 5,
+    backgroundColor: '#f9c2ff',
+    padding: 20,
+    borderRadius: 8,
+    alignItems: 'center',
+  },
+  title: {
+    fontSize: 16,
   },
 });
 
